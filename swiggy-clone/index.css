@@ -50,12 +50,22 @@
 }
 
 #search {
-  margin: 5px;
   border-radius: 10px;
   height: 25px;
 }
 
 #search_button {
+  border-radius: 5px;
+  height: 25px;
+}
+
+.top{
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.filterbtn{
   border-radius: 5px;
   height: 25px;
 }

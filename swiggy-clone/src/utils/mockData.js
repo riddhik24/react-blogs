@@ -1,0 +1,42 @@
+export const resList = [
+  {
+    id: 1,
+    name: "Meghana Food",
+    cusines: ["Biryani", "South Indian"],
+    rating: 4.2,
+    costForTwo: 35000,
+    delTime: 30,
+  },
+  {
+    id: 2,
+    name: "7 Star Restuarant",
+    cusines: ["Chinese", "Veg", "Non-Veg"],
+    rating: 3.2,
+    costForTwo: 45000,
+    delTime: 45,
+  },
+  {
+    id: 3,
+    name: "Shankar Vilas",
+    cusines: ["Fast Food", "Sweets", "Snacks"],
+    rating: 3.8,
+    costForTwo: 20000,
+    delTime: 20,
+  },
+  {
+    id: 4,
+    name: "Chinese Adda",
+    cusines: ["Fast Food", "Chinese Items", "Snacks"],
+    rating: 4.5,
+    costForTwo: 35000,
+    delTime: 35,
+  },
+  {
+    id: 5,
+    name: "Udupi Khana Khazana",
+    cusines: ["Fast Food", "South Indian", "Drinks"],
+    rating: 4.0,
+    costForTwo: 45000,
+    delTime: 45,
+  },
+];
