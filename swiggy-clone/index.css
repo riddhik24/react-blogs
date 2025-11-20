@@ -47,6 +47,7 @@
 
 .res-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 #search {
@@ -59,13 +60,32 @@
   height: 25px;
 }
 
-.top{
+.top {
   display: flex;
   justify-content: space-between;
   margin: 5px;
 }
 
-.filterbtn{
+.filterbtn {
   border-radius: 5px;
   height: 25px;
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  margin: 20px;
+  height: 350px;
+  width: 200px;
+  background-color: #f0f0f0;
+}
+
+.login-btn{
+  height: 55px;
+  width: auto;
+  border-radius: 5px;
+  cursor: pointer;
 }
