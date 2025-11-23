@@ -3,3 +3,5 @@ export const RES_IMG_URL =
 
 export const LOGO_URL =
   "https://www.psdtemplatedesign.com/wp-content/uploads/edd/2017/12/logo-design.jpg";
+
+export const MENU_API_URL = "https://namastedev.com/api/v1/listRestaurantMenu/";

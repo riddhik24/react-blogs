@@ -1,7 +1,7 @@
-import Loading from "./Loading";
 import RestuarantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestuarants, setListOfRestuarants] = useState([]);
@@ -13,26 +13,18 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.9690247&lng=72.8205292&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch("https://namastedev.com/api/v1/listRestaurants");
 
     const json = await data.json();
-    console.log(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
     setListOfRestuarants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
     setFilteredRestuarants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
   };
-
-  // Conditional rendering - 1
-  // if(listOfRestuarants === 0){
-  //   return <Shimmer />
-  // }
   return (
     <div className="body">
       <div className="top">
@@ -61,10 +53,10 @@ const Body = () => {
             className="filterbtn"
             onClick={() => {
               const filteredRestuarants = listOfRestuarants.filter(
-                (res) => res?.info?.avgRating > 4
+                (res) => res?.info?.avgRating > 4.5
               );
 
-              setListOfRestuarants(filteredRestuarants);
+              setFilteredRestuarants(filteredRestuarants);
             }}
           >
             Filter
@@ -72,13 +64,17 @@ const Body = () => {
         </div>
       </div>
       <div className="res-container">
-        {/* Conditinal Rendering - 2 - ternary operator*/}
         {filteredRestuarants?.length > 0 ? (
-          filteredRestuarants?.map((res, index) => (
-            <RestuarantCard key={res.info.id} resData={res} />
+          filteredRestuarants?.map((res) => (
+            <Link
+              key={res.info.id}
+              to={"/restaurant/" + res.info.id}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <RestuarantCard resData={res} />
+            </Link>
           ))
         ) : (
-          // <Loading message="Loading Restaurants" />
           <Shimmer />
         )}
       </div>
