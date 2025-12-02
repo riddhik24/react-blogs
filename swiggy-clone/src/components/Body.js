@@ -25,6 +25,7 @@ const Body = () => {
         ?.restaurants
     );
   };
+
   return (
     <div className="body">
       <div className="top">
