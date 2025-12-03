@@ -1,4 +1,4 @@
-import RestuarantCard from "./RestaurantCard";
+import RestuarantCard, { pureVegLabel, pureVegLabel } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ const Body = () => {
   const [listOfRestuarants, setListOfRestuarants] = useState([]);
   const [filteredRestuarants, setFilteredRestuarants] = useState([]);
 
+  const PureVegLabel = pureVegLabel(RestuarantCard);
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
     fetchData();
@@ -25,7 +26,6 @@ const Body = () => {
         ?.restaurants
     );
   };
-
   return (
     <div className="body">
       <div className="top flex justify-between">
@@ -52,7 +52,7 @@ const Body = () => {
         </div>
         <div className="filter m-4 p-4 flex items-center">
           <button
-            className="px-4 py-2 rounded-xl bg-gray-100 cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-orange-200 cursor-pointer"
             onClick={() => {
               const filteredRestuarants = listOfRestuarants.filter(
                 (res) => res?.info?.avgRating > 4.5
@@ -61,7 +61,18 @@ const Body = () => {
               setFilteredRestuarants(filteredRestuarants);
             }}
           >
-            Filter
+            High Rating Restaurants
+          </button>
+          <button
+            className="px-4 mx-2 py-2 rounded-xl cursor-pointer bg-green-200"
+            onClick={() => {
+              const filteredRestuarants = listOfRestuarants.filter(
+                (res) => res?.info?.veg == true
+              );
+              setFilteredRestuarants(filteredRestuarants);
+            }}
+          >
+            Show Veg Only
           </button>
         </div>
       </div>
@@ -69,7 +80,11 @@ const Body = () => {
         {filteredRestuarants?.length > 0 ? (
           filteredRestuarants?.map((res) => (
             <Link key={res.info.id} to={"/restaurant/" + res.info.id}>
-              <RestuarantCard resData={res} />
+              {res.info.veg ? (
+                <PureVegLabel resData={res} />
+              ) : (
+                <RestuarantCard resData={res} />
+              )}
             </Link>
           ))
         ) : (

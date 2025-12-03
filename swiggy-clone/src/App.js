@@ -9,6 +9,7 @@ import Loading from "./components/Loading";
 import RestaurantMenu from "./components/RestaurantMenu";
 import useOnlineStatus from "./utils/useOnlineStatus";
 import { lazy, Suspense } from "react";
+import React from "react";
 const App = () => {
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false)
