@@ -1,14 +1,15 @@
 import RestuarantCard, { pureVegLabel, pureVegLabel } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestuarants, setListOfRestuarants] = useState([]);
   const [filteredRestuarants, setFilteredRestuarants] = useState([]);
-
-  const PureVegLabel = pureVegLabel(RestuarantCard);
   const [searchText, setSearchText] = useState("");
+  const PureVegLabel = pureVegLabel(RestuarantCard);
+  const { loggedInUser, setName } = useContext(UserContext);
   useEffect(() => {
     fetchData();
   }, []);
@@ -44,11 +45,20 @@ const Body = () => {
               const filteredRestuarants = listOfRestuarants.filter((res) =>
                 res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
               );
+
               setFilteredRestuarants(filteredRestuarants);
             }}
           >
             Search
           </button>
+
+          <input
+            type="text"
+            className="border border-solid rounded-lg m-2 px-4 h-9"
+            id="search"
+            value={loggedInUser}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
         <div className="filter m-4 p-4 flex items-center">
           <button
@@ -57,7 +67,6 @@ const Body = () => {
               const filteredRestuarants = listOfRestuarants.filter(
                 (res) => res?.info?.avgRating > 4.5
               );
-
               setFilteredRestuarants(filteredRestuarants);
             }}
           >

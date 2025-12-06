@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -36,11 +37,11 @@ class UserClass extends React.Component {
     // const { count } = this.state;
     // console.log("Child Rendered");
     return (
-      <div className="user-card">
-        <img src={avatar_url} alt="avatar" />
+      <div className="text-center place-items-center m-10">
+        <img src={avatar_url} alt="avatar" className="h-[200px]" />
 
         {/* <h1>Count = {count}</h1> */}
-        <h2>Name: {name}</h2>
+        <h2 className="font-bold">Name: {name}</h2>
         <h3>Location: {location}</h3>
         <h4>Contact: @riddhikhere</h4>
         {/* <button
@@ -52,6 +53,11 @@ class UserClass extends React.Component {
         >
           Increase Count
         </button> */}
+        <UserContext.Consumer>
+          {({ loggedInUser }) => (
+            <h1 className="font-bold">Logged In User: {loggedInUser}</h1>
+          )}
+        </UserContext.Consumer>
       </div>
     );
   }

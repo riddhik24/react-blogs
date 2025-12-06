@@ -8,19 +8,36 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Loading from "./components/Loading";
 import RestaurantMenu from "./components/RestaurantMenu";
 import useOnlineStatus from "./utils/useOnlineStatus";
-import { lazy, Suspense } from "react";
-import React from "react";
+import { lazy, Suspense, useContext, useEffect, useState } from "react";
+import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 const App = () => {
+  const { loggedInUser } = useContext(UserContext);
+  const [name, setName] = useState(loggedInUser);
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false)
     return (
       <h1>Looks like you're offline, please check your internet connection.</h1>
     );
+
+  useEffect(() => {
+    const data = {
+      name: "Riddhik Mohite",
+    };
+
+    setName(data.name);
+  }, []);
   return (
-    <div className="container">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={store}>
+      <UserContext.Provider value={{ loggedInUser: name, setName }}>
+        <div className="container">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -50,6 +67,10 @@ const router = createBrowserRouter([
             <About />
           </Suspense>
         ),
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
       {
         path: "restaurant/:resId",

@@ -6,9 +6,9 @@ const RestuarantCard = (props) => {
   const { deliveryTime } = props.resData.info.sla;
 
   return (
-    <div className="m-6 p-4 h-[450px] w-[250px] bg-gray-100 rounded-lg items-center hover:bg-gray-400">
+    <div className="m-6 p-4 w-[250px] bg-gray-100 rounded-lg items-center hover:bg-gray-400">
       <img
-        className="rounded-md"
+        className="rounded-md h-[250px]"
         alt="res-image"
         src={RES_IMG_URL + cloudinaryImageId}
       />

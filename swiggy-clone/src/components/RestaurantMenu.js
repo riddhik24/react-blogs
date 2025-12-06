@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
 const RestaurantMenu = () => {
+  const [showIndex, setShowIndex] = useState(null);
+
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
 
@@ -11,8 +13,8 @@ const RestaurantMenu = () => {
   const { name, costForTwoMessage, cuisines } =
     resInfo?.cards[2]?.card?.card?.info;
 
-  const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+  // const { itemCards } =
+  //   resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
   const categories =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
@@ -20,6 +22,14 @@ const RestaurantMenu = () => {
         c?.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
+
+  const handleToggle = (index) => {
+    if (index == showIndex) {
+      setShowIndex(null);
+    } else {
+      setShowIndex(index);
+    }
+  };
 
   return (
     <div className="p-4 m-4 text-center">
@@ -30,16 +40,15 @@ const RestaurantMenu = () => {
 
       {/* categories in accordions */}
       {categories.map((category, index) => (
-        <RestaurantCategory data={category.card.card} key={index} />
+        // controlled component
+        <RestaurantCategory
+          data={category.card.card}
+          key={index}
+          showItems={index == showIndex ? true : false}
+          setShowIndex={() => handleToggle(index)}
+          index={index}
+        />
       ))}
-      {/* <h2 className=" text-lg font-bold my-2">Menu</h2>
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} - ₹{item.card.info.price / 100}
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 };
