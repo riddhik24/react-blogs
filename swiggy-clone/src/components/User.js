@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CORS_PROXY } from "../utils/constants";
 
 const User = ({ name }) => {
   // const [count, setCount] = useState(0);
@@ -10,7 +11,9 @@ const User = ({ name }) => {
     fetchUser();
   }, []);
   const fetchUser = async () => {
-    const data = await fetch("https://api.github.com/users/riddhik24");
+    const data = await fetch(
+      CORS_PROXY + "https://api.github.com/users/riddhik24"
+    );
 
     const json = await data.json();
 

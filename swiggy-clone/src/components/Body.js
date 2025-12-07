@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
+import { CORS_PROXY } from "../utils/constants";
 
 const Body = () => {
   const [listOfRestuarants, setListOfRestuarants] = useState([]);
@@ -15,7 +16,9 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch("https://namastedev.com/api/v1/listRestaurants");
+    const data = await fetch(
+      CORS_PROXY + "https://namastedev.com/api/v1/listRestaurants"
+    );
 
     const json = await data.json();
     setListOfRestuarants(

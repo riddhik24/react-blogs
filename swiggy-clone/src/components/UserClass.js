@@ -1,5 +1,6 @@
 import React from "react";
 import UserContext from "../utils/UserContext";
+import { CORS_PROXY } from "../utils/constants";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -18,7 +19,9 @@ class UserClass extends React.Component {
 
   async componentDidMount() {
     // console.log("Child Mounted");
-    const data = await fetch("https://api.github.com/users/riddhik24");
+    const data = await fetch(
+      CORS_PROXY + "https://api.github.com/users/riddhik24"
+    );
 
     const json = await data.json();
 
