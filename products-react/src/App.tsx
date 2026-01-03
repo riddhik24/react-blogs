@@ -1,14 +1,17 @@
-import './App.css'
-import { Outlet } from 'react-router-dom'
-import Header from './components/Header'
+import "./App.css";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 function App() {
-
   return (
-    <div className='bg-amber-50'>
-    <Header />
-    <Outlet />
-    </div>
-  )
+    <Provider store={store}>
+      <div>
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
+  );
 }
 
-export default App
+export default App;

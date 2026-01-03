@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home.tsx";
 import { Products } from "./components/Products.tsx";
 import ProductDetails from "./components/ProductDetails.tsx";
+import Cart from "./components/Cart.tsx";
+import { Checkout } from "./components/Checkout.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "products/:type",
         element: <Products />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
       {
         path: "product-detail/:productId",
